@@ -3,18 +3,16 @@ import { supabase } from '../supabaseClient';
 import { 
   ClipboardList, 
   LogOut, 
-  Utensils, 
+  Crown, 
   RefreshCw, 
   Clock, 
   CheckCircle, 
   ChefHat, 
   Phone, 
   MapPin, 
-  DollarSign, 
   Search,
   ExternalLink,
-  ChevronDown,
-  AlertCircle
+  ChevronDown
 } from 'lucide-react';
 
 export default function AdminDashboard({ onLogout, onGoToWebsite }) {
@@ -54,7 +52,6 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
   const handleStatusChange = async (orderId, newStatus) => {
     setStatusUpdatingId(orderId);
     try {
-      // 1. Update in Supabase
       const { error } = await supabase
         .from('orders')
         .update({ status: newStatus })
@@ -66,7 +63,6 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
         return;
       }
 
-      // 2. Update local state
       setOrders((prev) =>
         prev.map((ord) => (ord.id === orderId ? { ...ord, status: newStatus } : ord))
       );
@@ -90,8 +86,6 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
     return matchesStatus && matchesSearch;
   });
 
-  // Calculate stats
-  const totalRevenue = orders.reduce((sum, o) => sum + Number(o.total_price || 0), 0);
   const pendingCount = orders.filter((o) => (o.status || 'Pending') === 'Pending').length;
   const preparingCount = orders.filter((o) => o.status === 'Preparing').length;
   const deliveredCount = orders.filter((o) => o.status === 'Delivered').length;
@@ -99,16 +93,16 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
   const getStatusBadgeStyle = (status) => {
     switch (status) {
       case 'Preparing':
-        return 'bg-blue-500/10 text-blue-400 border-blue-500/30';
+        return 'bg-blue-500/10 text-blue-400 border-blue-500/40';
       case 'Delivered':
-        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/30';
+        return 'bg-emerald-500/10 text-emerald-400 border-emerald-500/40';
       default:
-        return 'bg-amber-500/10 text-amber-400 border-amber-500/30';
+        return 'bg-red-500/10 text-red-400 border-red-500/40';
     }
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-white flex flex-col md:flex-row">
+    <div className="min-h-screen bg-black text-white flex flex-col md:flex-row">
       
       {/* Toast Alert */}
       {toastMessage && (
@@ -121,16 +115,16 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
       {/* =========================================
           LEFT SIDEBAR (Orders, Logout) - Requirement
           ========================================= */}
-      <aside className="w-full md:w-64 bg-slate-900 border-r border-slate-800 p-6 flex flex-col justify-between flex-shrink-0">
+      <aside className="w-full md:w-64 bg-neutral-950 border-r border-neutral-900 p-6 flex flex-col justify-between flex-shrink-0">
         <div>
           {/* Brand */}
-          <div className="flex items-center gap-3 pb-8 border-b border-slate-800">
-            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/30">
-              <Utensils className="w-5 h-5 text-slate-950 font-bold" />
+          <div className="flex items-center gap-3 pb-8 border-b border-neutral-900">
+            <div className="w-10 h-10 rounded-xl bg-gradient-to-tr from-red-700 to-rose-600 flex items-center justify-center shadow-lg shadow-red-700/40">
+              <Crown className="w-5 h-5 text-white font-bold" />
             </div>
             <div>
-              <h2 className="font-extrabold text-lg text-white">Royal Dine</h2>
-              <p className="text-[11px] text-amber-400 font-medium uppercase tracking-wider">Admin Dashboard</p>
+              <h2 className="font-extrabold text-lg text-white">Saltanat</h2>
+              <p className="text-[10px] text-red-400 font-medium uppercase tracking-wider">Admin Portal</p>
             </div>
           </div>
 
@@ -138,20 +132,20 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
           <nav className="mt-8 space-y-2">
             <button
               onClick={() => setFilterStatus('All')}
-              className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-amber-500/10 border border-amber-500/30 text-amber-400 font-bold text-sm shadow-sm transition"
+              className="w-full flex items-center justify-between px-4 py-3 rounded-xl bg-red-950/60 border border-red-600/40 text-red-400 font-bold text-sm shadow-sm transition"
             >
               <div className="flex items-center gap-3">
-                <ClipboardList className="w-4 h-4" />
+                <ClipboardList className="w-4 h-4 text-red-500" />
                 <span>Orders</span>
               </div>
-              <span className="bg-amber-400 text-slate-950 text-xs px-2 py-0.5 rounded-full font-black">
+              <span className="bg-red-600 text-white text-xs px-2 py-0.5 rounded-full font-black">
                 {orders.length}
               </span>
             </button>
 
             <button
               onClick={onGoToWebsite}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-slate-400 hover:text-white hover:bg-slate-800/80 font-medium text-sm transition"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-xl text-neutral-400 hover:text-white hover:bg-neutral-900 font-medium text-sm transition cursor-pointer"
             >
               <ExternalLink className="w-4 h-4" />
               <span>Go to Website</span>
@@ -160,10 +154,10 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
         </div>
 
         {/* Sidebar Footer: Logout */}
-        <div className="pt-6 border-t border-slate-800">
-          <div className="mb-4 px-2 text-xs text-slate-400">
-            <p className="text-slate-500">Logged in as:</p>
-            <p className="font-mono text-slate-300 truncate">admin@restaurant.com</p>
+        <div className="pt-6 border-t border-neutral-900">
+          <div className="mb-4 px-2 text-xs text-neutral-400">
+            <p className="text-neutral-500">Logged in as:</p>
+            <p className="font-mono text-neutral-300 truncate">admin@restaurant.com</p>
           </div>
 
           <button
@@ -184,48 +178,48 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
         {/* Top Header */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
           <div>
-            <h1 className="text-2xl sm:text-3xl font-black text-white">Orders Management</h1>
-            <p className="text-xs sm:text-sm text-slate-400 mt-1">
-              Real-time orders synced directly from Supabase database.
+            <h1 className="text-2xl sm:text-3xl font-black text-white">Saltanat Orders Management</h1>
+            <p className="text-xs sm:text-sm text-neutral-400 mt-1">
+              Real-time orders synced directly with Supabase database.
             </p>
           </div>
 
           <button
             onClick={fetchOrders}
             disabled={loading}
-            className="self-start sm:self-auto flex items-center gap-2 px-4 py-2.5 rounded-xl bg-slate-900 border border-slate-800 hover:border-slate-700 text-slate-300 hover:text-white text-xs font-semibold transition"
+            className="self-start sm:self-auto flex items-center gap-2 px-4 py-2.5 rounded-xl bg-neutral-900 border border-neutral-800 hover:border-red-900/40 text-neutral-300 hover:text-white text-xs font-semibold transition cursor-pointer"
           >
-            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-amber-400' : ''}`} />
+            <RefreshCw className={`w-3.5 h-3.5 ${loading ? 'animate-spin text-red-500' : ''}`} />
             <span>Refresh Orders</span>
           </button>
         </div>
 
         {/* Stats Row */}
         <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-          <div className="bg-slate-900 border border-slate-800 p-5 rounded-2xl">
-            <span className="text-xs text-slate-400 block font-medium">Total Orders</span>
+          <div className="bg-neutral-900 border border-neutral-800 p-5 rounded-2xl">
+            <span className="text-xs text-neutral-400 block font-medium">Total Orders</span>
             <span className="text-2xl font-black text-white mt-1 block">{orders.length}</span>
           </div>
 
-          <div className="bg-slate-900 border border-amber-500/30 p-5 rounded-2xl">
-            <span className="text-xs text-amber-400 block font-medium flex items-center gap-1.5">
-              <Clock className="w-3.5 h-3.5" /> Pending
+          <div className="bg-neutral-900 border border-red-500/30 p-5 rounded-2xl">
+            <span className="text-xs text-red-400 block font-medium flex items-center gap-1.5">
+              <Clock className="w-3.5 h-3.5 text-red-500" /> Pending
             </span>
-            <span className="text-2xl font-black text-amber-300 mt-1 block">{pendingCount}</span>
+            <span className="text-2xl font-black text-red-400 mt-1 block">{pendingCount}</span>
           </div>
 
-          <div className="bg-slate-900 border border-blue-500/30 p-5 rounded-2xl">
+          <div className="bg-neutral-900 border border-blue-500/30 p-5 rounded-2xl">
             <span className="text-xs text-blue-400 block font-medium flex items-center gap-1.5">
-              <ChefHat className="w-3.5 h-3.5" /> Preparing
+              <ChefHat className="w-3.5 h-3.5 text-blue-500" /> Preparing
             </span>
-            <span className="text-2xl font-black text-blue-300 mt-1 block">{preparingCount}</span>
+            <span className="text-2xl font-black text-blue-400 mt-1 block">{preparingCount}</span>
           </div>
 
-          <div className="bg-slate-900 border border-emerald-500/30 p-5 rounded-2xl">
+          <div className="bg-neutral-900 border border-emerald-500/30 p-5 rounded-2xl">
             <span className="text-xs text-emerald-400 block font-medium flex items-center gap-1.5">
-              <CheckCircle className="w-3.5 h-3.5" /> Delivered
+              <CheckCircle className="w-3.5 h-3.5 text-emerald-500" /> Delivered
             </span>
-            <span className="text-2xl font-black text-emerald-300 mt-1 block">{deliveredCount}</span>
+            <span className="text-2xl font-black text-emerald-400 mt-1 block">{deliveredCount}</span>
           </div>
         </div>
 
@@ -237,10 +231,10 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
               <button
                 key={status}
                 onClick={() => setFilterStatus(status)}
-                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition ${
+                className={`px-3.5 py-1.5 rounded-xl text-xs font-semibold transition cursor-pointer ${
                   filterStatus === status
-                    ? 'bg-amber-500 text-slate-950 font-bold shadow-md shadow-amber-500/20'
-                    : 'bg-slate-900 text-slate-400 hover:text-white border border-slate-800'
+                    ? 'bg-gradient-to-r from-red-600 to-rose-700 text-white font-bold shadow-md shadow-red-700/30'
+                    : 'bg-neutral-900 text-neutral-400 hover:text-white border border-neutral-800'
                 }`}
               >
                 {status}
@@ -250,13 +244,13 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
 
           {/* Search box */}
           <div className="relative w-full sm:w-64">
-            <Search className="w-3.5 h-3.5 text-slate-500 absolute left-3 top-1/2 -translate-y-1/2" />
+            <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-3 top-1/2 -translate-y-1/2" />
             <input
               type="text"
               placeholder="Search by name, phone, ID..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-9 pr-3 py-2 bg-slate-900 border border-slate-800 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:border-amber-400"
+              className="w-full pl-9 pr-3 py-2 bg-neutral-900 border border-neutral-800 rounded-xl text-xs text-white placeholder-neutral-500 focus:outline-none focus:border-red-500"
             />
           </div>
         </div>
@@ -264,14 +258,14 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
         {/* Orders Table / Cards */}
         {loading ? (
           <div className="py-20 text-center space-y-3">
-            <RefreshCw className="w-8 h-8 animate-spin text-amber-400 mx-auto" />
-            <p className="text-sm text-slate-400">Loading orders from Supabase...</p>
+            <RefreshCw className="w-8 h-8 animate-spin text-red-500 mx-auto" />
+            <p className="text-sm text-neutral-400">Loading orders from Supabase...</p>
           </div>
         ) : filteredOrders.length === 0 ? (
-          <div className="text-center py-20 bg-slate-900/50 rounded-3xl border border-slate-800">
-            <ClipboardList className="w-12 h-12 text-slate-600 mx-auto mb-3" />
-            <h3 className="text-base font-bold text-slate-300">No orders found</h3>
-            <p className="text-xs text-slate-500 mt-1">
+          <div className="text-center py-20 bg-neutral-900/50 rounded-3xl border border-neutral-800">
+            <ClipboardList className="w-12 h-12 text-neutral-600 mx-auto mb-3" />
+            <h3 className="text-base font-bold text-neutral-300">No orders found</h3>
+            <p className="text-xs text-neutral-500 mt-1">
               {orders.length === 0 
                 ? 'No orders have been submitted yet. Go to the website and place a test order!' 
                 : 'No orders match your filter criteria.'}
@@ -286,7 +280,6 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
                 timeStyle: 'short',
               }) : 'Just now';
 
-              // Parse items if string or json
               let itemsList = [];
               if (Array.isArray(order.items)) {
                 itemsList = order.items;
@@ -301,24 +294,24 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
               return (
                 <div
                   key={order.id}
-                  className="bg-slate-900 border border-slate-800 rounded-2xl p-5 sm:p-6 hover:border-slate-700 transition shadow-lg"
+                  className="bg-neutral-900 border border-neutral-800 rounded-2xl p-5 sm:p-6 hover:border-red-950/60 transition shadow-lg"
                 >
-                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-slate-800">
+                  <div className="flex flex-col lg:flex-row lg:items-center justify-between gap-4 pb-4 border-b border-neutral-800">
                     
                     {/* Order ID & Time */}
                     <div className="flex items-center gap-3">
-                      <span className="font-mono text-xs font-bold bg-amber-500/10 text-amber-400 px-3 py-1 rounded-lg border border-amber-500/30">
+                      <span className="font-mono text-xs font-bold bg-red-950/60 text-red-400 px-3 py-1 rounded-lg border border-red-800/40">
                         #{order.id}
                       </span>
-                      <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                        <Clock className="w-3.5 h-3.5 text-slate-500" />
+                      <div className="flex items-center gap-1.5 text-xs text-neutral-400">
+                        <Clock className="w-3.5 h-3.5 text-neutral-500" />
                         <span>{createdDate}</span>
                       </div>
                     </div>
 
                     {/* Status Dropdown - Core Requirement 6: Pending -> Preparing -> Delivered */}
                     <div className="flex items-center gap-3">
-                      <span className="text-xs text-slate-400 font-medium">Order Status:</span>
+                      <span className="text-xs text-neutral-400 font-medium">Order Status:</span>
                       
                       <div className="relative">
                         <select
@@ -329,21 +322,21 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
                             currentStatus
                           )}`}
                         >
-                          <option value="Pending" className="bg-slate-900 text-amber-400 font-semibold">
+                          <option value="Pending" className="bg-neutral-950 text-red-400 font-semibold">
                             Pending
                           </option>
-                          <option value="Preparing" className="bg-slate-900 text-blue-400 font-semibold">
+                          <option value="Preparing" className="bg-neutral-950 text-blue-400 font-semibold">
                             Preparing
                           </option>
-                          <option value="Delivered" className="bg-slate-900 text-emerald-400 font-semibold">
+                          <option value="Delivered" className="bg-neutral-950 text-emerald-400 font-semibold">
                             Delivered
                           </option>
                         </select>
-                        <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-slate-400" />
+                        <ChevronDown className="w-3.5 h-3.5 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none text-neutral-400" />
                       </div>
 
                       {statusUpdatingId === order.id && (
-                        <RefreshCw className="w-3.5 h-3.5 animate-spin text-amber-400" />
+                        <RefreshCw className="w-3.5 h-3.5 animate-spin text-red-500" />
                       )}
                     </div>
                   </div>
@@ -354,28 +347,28 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
                     {/* Customer Info */}
                     <div className="md:col-span-4 space-y-2 text-xs">
                       <h4 className="font-bold text-white text-sm">{order.customer_name}</h4>
-                      <p className="flex items-center gap-2 text-slate-300">
-                        <Phone className="w-3.5 h-3.5 text-amber-400 flex-shrink-0" />
+                      <p className="flex items-center gap-2 text-neutral-300">
+                        <Phone className="w-3.5 h-3.5 text-red-500 flex-shrink-0" />
                         <span>{order.customer_phone}</span>
                       </p>
-                      <p className="flex items-start gap-2 text-slate-400">
-                        <MapPin className="w-3.5 h-3.5 text-amber-400 flex-shrink-0 mt-0.5" />
+                      <p className="flex items-start gap-2 text-neutral-400">
+                        <MapPin className="w-3.5 h-3.5 text-red-500 flex-shrink-0 mt-0.5" />
                         <span>{order.customer_address}</span>
                       </p>
                     </div>
 
                     {/* Dishes Ordered */}
-                    <div className="md:col-span-5 bg-slate-950/70 p-3.5 rounded-xl border border-slate-800/80">
-                      <span className="text-[11px] font-bold text-slate-400 uppercase tracking-wider block mb-2">
+                    <div className="md:col-span-5 bg-black/60 p-3.5 rounded-xl border border-neutral-800/80">
+                      <span className="text-[11px] font-bold text-neutral-400 uppercase tracking-wider block mb-2">
                         Dishes Ordered
                       </span>
                       <div className="space-y-1.5 text-xs">
                         {itemsList.map((item, idx) => (
-                          <div key={idx} className="flex justify-between text-slate-300">
+                          <div key={idx} className="flex justify-between text-neutral-300">
                             <span>
-                              {item.name} <strong className="text-amber-400">x{item.quantity}</strong>
+                              {item.name} <strong className="text-red-400">x{item.quantity}</strong>
                             </span>
-                            <span className="text-slate-400">
+                            <span className="text-neutral-400">
                               Rs. {item.subtotal || (item.price * item.quantity)}
                             </span>
                           </div>
@@ -385,8 +378,8 @@ export default function AdminDashboard({ onLogout, onGoToWebsite }) {
 
                     {/* Total Amount */}
                     <div className="md:col-span-3 flex flex-col justify-center items-start md:items-end">
-                      <span className="text-xs text-slate-400 font-medium">Total Amount</span>
-                      <span className="text-xl font-black text-amber-400 mt-0.5">
+                      <span className="text-xs text-neutral-400 font-medium">Total Amount</span>
+                      <span className="text-xl font-black text-red-500 mt-0.5">
                         Rs. {order.total_price}
                       </span>
                       <span className="text-[11px] text-emerald-400/90 mt-1">Cash on Delivery</span>

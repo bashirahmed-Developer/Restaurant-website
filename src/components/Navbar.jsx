@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Utensils, ShoppingBag, ShieldCheck, Menu, X, PhoneCall } from 'lucide-react';
+import { Utensils, ShoppingBag, ShieldCheck, Menu, X, PhoneCall, Crown } from 'lucide-react';
 
 export default function Navbar({ 
   cartItems, 
@@ -28,23 +28,23 @@ export default function Navbar({
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-slate-900/90 backdrop-blur-md border-b border-amber-500/20 text-white shadow-xl">
+    <header className="sticky top-0 z-50 bg-black/90 backdrop-blur-md border-b border-red-950/40 text-white shadow-2xl transition-all">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-20">
           
-          {/* Logo */}
+          {/* Logo: Saltanat Restaurant */}
           <div 
             onClick={() => { setCurrentView('customer'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
             className="flex items-center gap-3 cursor-pointer group"
           >
-            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-amber-600 to-amber-400 flex items-center justify-center shadow-lg shadow-amber-500/30 group-hover:scale-105 transition-transform">
-              <Utensils className="w-6 h-6 text-slate-950 font-bold" />
+            <div className="w-12 h-12 rounded-xl bg-gradient-to-tr from-red-700 via-red-600 to-rose-500 flex items-center justify-center shadow-lg shadow-red-700/40 group-hover:scale-105 group-hover:rotate-3 transition-all duration-300">
+              <Crown className="w-6 h-6 text-white font-bold" />
             </div>
             <div>
-              <span className="text-2xl font-black tracking-tight text-white flex items-center gap-1">
-                Royal <span className="text-amber-400">Dine</span>
+              <span className="text-2xl font-black tracking-tight text-white flex items-center gap-1.5">
+                Saltanat <span className="text-transparent bg-clip-text bg-gradient-to-r from-red-500 to-rose-400">Restaurant</span>
               </span>
-              <p className="text-xs text-amber-300/80 tracking-widest uppercase font-medium">Fine Flavors & Bistro</p>
+              <p className="text-[10px] text-red-400/90 tracking-widest uppercase font-semibold">The Royal Taste of Heritage</p>
             </div>
           </div>
 
@@ -52,27 +52,27 @@ export default function Navbar({
           <nav className="hidden md:flex items-center gap-8">
             <button 
               onClick={() => { setCurrentView('customer'); window.scrollTo({ top: 0, behavior: 'smooth' }); }}
-              className="text-slate-300 hover:text-amber-400 text-sm font-semibold transition-colors"
+              className="text-neutral-300 hover:text-red-400 text-sm font-semibold transition-colors duration-200"
             >
               Home
             </button>
             <button 
               onClick={() => scrollTo('menu-section')}
-              className="text-slate-300 hover:text-amber-400 text-sm font-semibold transition-colors"
+              className="text-neutral-300 hover:text-red-400 text-sm font-semibold transition-colors duration-200"
             >
               Menu
             </button>
             <button 
               onClick={() => scrollTo('order-section')}
-              className="text-slate-300 hover:text-amber-400 text-sm font-semibold transition-colors"
+              className="text-neutral-300 hover:text-red-400 text-sm font-semibold transition-colors duration-200"
             >
               Order Online
             </button>
             <button 
               onClick={() => scrollTo('about-section')}
-              className="text-slate-300 hover:text-amber-400 text-sm font-semibold transition-colors"
+              className="text-neutral-300 hover:text-red-400 text-sm font-semibold transition-colors duration-200"
             >
-              About
+              Our Story
             </button>
           </nav>
 
@@ -81,21 +81,21 @@ export default function Navbar({
             {/* Phone Help */}
             <a 
               href="tel:+923001234567" 
-              className="hidden lg:flex items-center gap-2 text-xs text-slate-400 bg-slate-800/80 px-3 py-2 rounded-full border border-slate-700/60 hover:text-amber-400 transition"
+              className="hidden lg:flex items-center gap-2 text-xs text-neutral-400 bg-neutral-900/90 px-3.5 py-2 rounded-full border border-neutral-800 hover:text-red-400 hover:border-red-900/40 transition duration-200"
             >
-              <PhoneCall className="w-3.5 h-3.5 text-amber-400" />
+              <PhoneCall className="w-3.5 h-3.5 text-red-500" />
               <span>+92 300 1234567</span>
             </a>
 
             {/* Cart Button */}
             <button 
               onClick={onOpenCart}
-              className="relative flex items-center gap-2 px-4 py-2.5 rounded-xl bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-sm shadow-md shadow-amber-500/20 transition-all hover:scale-105 active:scale-95"
+              className="relative flex items-center gap-2 px-5 py-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 hover:from-red-500 hover:to-red-600 text-white font-bold text-sm shadow-lg shadow-red-700/30 transition-all duration-300 hover:scale-105 active:scale-95 cursor-pointer"
             >
               <ShoppingBag className="w-4 h-4" />
-              <span>Order Cart</span>
+              <span>Cart</span>
               {totalQuantity > 0 && (
-                <span className="bg-slate-950 text-amber-400 text-xs px-2 py-0.5 rounded-full font-black ml-1 animate-pulse">
+                <span className="bg-black text-red-400 text-xs px-2 py-0.5 rounded-full font-black ml-1 border border-red-500/40 animate-pulse">
                   {totalQuantity}
                 </span>
               )}
@@ -110,13 +110,13 @@ export default function Navbar({
                   onOpenAdmin();
                 }
               }}
-              className={`flex items-center gap-1.5 px-3 py-2 rounded-xl text-xs font-semibold border transition ${
+              className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-semibold border transition duration-200 cursor-pointer ${
                 currentView === 'admin' 
-                  ? 'bg-amber-400/20 text-amber-300 border-amber-400/50' 
-                  : 'bg-slate-800/80 text-slate-300 border-slate-700 hover:bg-slate-700 hover:text-white'
+                  ? 'bg-red-950/60 text-red-400 border-red-500/60' 
+                  : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:bg-neutral-800 hover:text-white hover:border-neutral-700'
               }`}
             >
-              <ShieldCheck className="w-4 h-4 text-amber-400" />
+              <ShieldCheck className="w-4 h-4 text-red-500" />
               <span>{currentView === 'admin' ? 'View Website' : 'Admin Portal'}</span>
             </button>
           </div>
@@ -125,11 +125,11 @@ export default function Navbar({
           <div className="flex md:hidden items-center gap-3">
             <button 
               onClick={onOpenCart}
-              className="relative p-2.5 rounded-xl bg-amber-500 text-slate-950"
+              className="relative p-2.5 rounded-xl bg-gradient-to-r from-red-600 to-red-700 text-white shadow-md shadow-red-700/30"
             >
               <ShoppingBag className="w-5 h-5" />
               {totalQuantity > 0 && (
-                <span className="absolute -top-1.5 -right-1.5 bg-slate-950 text-amber-400 text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold border border-amber-400">
+                <span className="absolute -top-1.5 -right-1.5 bg-black text-red-400 text-xs w-5 h-5 rounded-full flex items-center justify-center font-bold border border-red-500">
                   {totalQuantity}
                 </span>
               )}
@@ -137,7 +137,7 @@ export default function Navbar({
 
             <button 
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-              className="p-2 rounded-xl bg-slate-800 text-slate-200 hover:text-white"
+              className="p-2.5 rounded-xl bg-neutral-900 border border-neutral-800 text-neutral-200 hover:text-white"
             >
               {mobileMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
             </button>
@@ -148,25 +148,25 @@ export default function Navbar({
 
       {/* Mobile Drawer */}
       {mobileMenuOpen && (
-        <div className="md:hidden bg-slate-900 border-b border-slate-800 px-6 py-6 space-y-4">
+        <div className="md:hidden bg-neutral-950 border-b border-red-950/40 px-6 py-6 space-y-4 animate-fade-in">
           <div className="flex flex-col gap-3">
             <button 
               onClick={() => scrollTo('menu-section')} 
-              className="text-left text-slate-200 hover:text-amber-400 font-medium py-2 border-b border-slate-800"
+              className="text-left text-neutral-200 hover:text-red-400 font-medium py-2 border-b border-neutral-900"
             >
               Explore Menu
             </button>
             <button 
               onClick={() => scrollTo('order-section')} 
-              className="text-left text-slate-200 hover:text-amber-400 font-medium py-2 border-b border-slate-800"
+              className="text-left text-neutral-200 hover:text-red-400 font-medium py-2 border-b border-neutral-900"
             >
               Order Online
             </button>
             <button 
               onClick={() => scrollTo('about-section')} 
-              className="text-left text-slate-200 hover:text-amber-400 font-medium py-2 border-b border-slate-800"
+              className="text-left text-neutral-200 hover:text-red-400 font-medium py-2 border-b border-neutral-900"
             >
-              About Us
+              Our Story
             </button>
           </div>
 
@@ -180,7 +180,7 @@ export default function Navbar({
                   onOpenAdmin();
                 }
               }}
-              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-slate-800 text-amber-400 font-semibold border border-slate-700"
+              className="w-full flex items-center justify-center gap-2 py-3 rounded-xl bg-neutral-900 text-red-400 font-semibold border border-red-950"
             >
               <ShieldCheck className="w-4 h-4" />
               <span>{currentView === 'admin' ? 'View Website' : 'Admin Portal'}</span>

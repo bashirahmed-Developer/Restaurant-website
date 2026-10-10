@@ -5,9 +5,9 @@ export const DISHES = [
     category: "Main Course",
     price: 650,
     rating: 4.9,
-    description: "Aromatic basmati rice cooked with tender marinated chicken, saffron, and rich royal spices.",
+    description: "Aromatic long-grain basmati rice cooked with succulent chicken, saffron, and rich traditional royal spices.",
     image: "https://images.unsplash.com/photo-1563379091339-03b21ab4a4f8?auto=format&fit=crop&w=800&q=80",
-    badge: "Chef's Special"
+    badge: "Saltanat Special"
   },
   {
     id: 2,
@@ -15,7 +15,7 @@ export const DISHES = [
     category: "Main Course",
     price: 1350,
     rating: 4.8,
-    description: "Traditional wok-cooked chicken infused with fresh tomatoes, ginger, green chilies, and freshly ground spices.",
+    description: "Traditional wok-cooked chicken infused with fresh tomatoes, ginger slices, green chilies, and desi ghee spices.",
     image: "https://images.unsplash.com/photo-1603894584373-5ac82b2ae398?auto=format&fit=crop&w=800&q=80",
     badge: "Bestseller"
   },
@@ -25,7 +25,7 @@ export const DISHES = [
     category: "Fast Food",
     price: 550,
     rating: 4.9,
-    description: "Double crispy fried chicken breast with spicy secret sauce, melted cheese, and fresh lettuce.",
+    description: "Double crispy fried chicken breast fillet with spicy secret red sauce, melted cheddar, and crunchy lettuce.",
     image: "https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=800&q=80",
     badge: "Popular"
   },
@@ -34,10 +34,10 @@ export const DISHES = [
     name: "Grilled Chicken Malai Tikka",
     category: "Starters",
     price: 750,
-    rating: 4.7,
-    description: "Mouth-melting boneless chicken cubes marinated in creamy yogurt, cashew paste, and aromatic herbs.",
-    image: "https://images.unsplash.com/photo-1599488615731-7e5c2823ff28?auto=format&fit=crop&w=800&q=80",
-    badge: "Tandoori"
+    rating: 4.8,
+    description: "Mouth-melting boneless chicken skewers marinated in rich cream, cashew paste, yogurt, and subtle white peppers.",
+    image: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=800&q=80",
+    badge: "Charcoal Grilled"
   },
   {
     id: 5,
@@ -45,19 +45,19 @@ export const DISHES = [
     category: "Fast Food",
     price: 690,
     rating: 4.8,
-    description: "100% prime beef patty charcoal-grilled, topped with caramelized onions, cheddar cheese, and smokey BBQ glaze.",
+    description: "100% prime beef patty charcoal-grilled to perfection, topped with caramelized onions, cheddar, and smoky glaze.",
     image: "https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=800&q=80",
-    badge: "Must Try"
+    badge: "Chef's Choice"
   },
   {
     id: 6,
     name: "Crispy Peri Peri Fries",
     category: "Starters",
     price: 320,
-    rating: 4.6,
-    description: "Golden crispy skin-on potato fries dusted with tangy, fiery South African peri peri seasoning.",
-    image: "https://images.unsplash.com/photo-1576107232684-1279f3908594?auto=format&fit=crop&w=800&q=80",
-    badge: "Snack"
+    rating: 4.7,
+    description: "Golden crispy skin-on potato fries dusted with tangy, fiery peri peri seasoning and served with garlic mayo.",
+    image: "https://images.unsplash.com/photo-1573080496219-bb080dd4f877?auto=format&fit=crop&w=800&q=80",
+    badge: "Hot Snack"
   },
   {
     id: 7,
@@ -65,9 +65,9 @@ export const DISHES = [
     category: "Desserts",
     price: 380,
     rating: 4.9,
-    description: "Slow-simmered rich rice pudding infused with pure saffron, cardamom, and garnished with roasted pistachios.",
-    image: "https://images.unsplash.com/photo-1541781774459-bb2af2f05b55?auto=format&fit=crop&w=800&q=80",
-    badge: "Sweet Delight"
+    description: "Slow-simmered rich creamy rice pudding infused with pure Kashmiri saffron, cardamom, and roasted pistachios.",
+    image: "https://images.unsplash.com/photo-1551024709-8f23befc6f87?auto=format&fit=crop&w=800&q=80",
+    badge: "Royal Sweet"
   },
   {
     id: 8,
@@ -75,8 +75,8 @@ export const DISHES = [
     category: "Drinks",
     price: 250,
     rating: 4.8,
-    description: "Refreshing crushed ice drink with freshly plucked garden mint, zesty lime, and a hint of black salt.",
+    description: "Refreshing crushed ice drink prepared with fresh garden mint, tangy zesty lime, and premium soda.",
     image: "https://images.unsplash.com/photo-1513558161293-cdaf765ed2fd?auto=format&fit=crop&w=800&q=80",
-    badge: "Chilled"
+    badge: "Ice Chilled"
   }
 ];

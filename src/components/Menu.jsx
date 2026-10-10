@@ -30,20 +30,20 @@ export default function Menu({ onAddToCart, cartItems }) {
   };
 
   return (
-    <section id="menu-section" className="py-20 bg-slate-950 text-white relative">
+    <section id="menu-section" className="py-20 bg-neutral-950 text-white relative">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Section Header */}
         <div className="text-center max-w-2xl mx-auto space-y-3 mb-12">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-amber-500/10 border border-amber-500/20 text-amber-400 text-xs font-bold uppercase tracking-wider">
-            <UtensilsCrossed className="w-3.5 h-3.5" />
-            <span>Curated Deliciousness</span>
+          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-red-950/60 border border-red-600/30 text-red-400 text-xs font-bold uppercase tracking-wider shadow-sm">
+            <UtensilsCrossed className="w-3.5 h-3.5 text-red-500" />
+            <span>Saltanat Royal Menu</span>
           </div>
           <h2 className="text-3xl sm:text-4xl font-extrabold tracking-tight">
-            Our Signature Dishes & Menu
+            Our Signature Dishes & Delicacies
           </h2>
-          <p className="text-sm sm:text-base text-slate-400">
-            Handcrafted with age-old recipes and cooked with aromatic spices. Pick your favorites and order in seconds!
+          <p className="text-sm sm:text-base text-neutral-400">
+            Charcoal barbecues, authentic slow-cooked biryanis and gourmet cravings. Add to order with a single click!
           </p>
         </div>
 
@@ -55,10 +55,10 @@ export default function Menu({ onAddToCart, cartItems }) {
               <button
                 key={category}
                 onClick={() => setSelectedCategory(category)}
-                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all whitespace-nowrap ${
+                className={`px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap cursor-pointer ${
                   selectedCategory === category
-                    ? 'bg-amber-500 text-slate-950 shadow-md shadow-amber-500/20 font-bold'
-                    : 'bg-slate-900 text-slate-300 hover:bg-slate-800 hover:text-white border border-slate-800'
+                    ? 'bg-gradient-to-r from-red-600 to-rose-700 text-white shadow-lg shadow-red-700/30 font-bold scale-105'
+                    : 'bg-neutral-900 text-neutral-300 hover:bg-neutral-800 hover:text-white border border-neutral-800'
                 }`}
               >
                 {category}
@@ -68,13 +68,13 @@ export default function Menu({ onAddToCart, cartItems }) {
 
           {/* Search bar */}
           <div className="relative w-full md:w-72">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400" />
+            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-neutral-400" />
             <input
               type="text"
-              placeholder="Search biryani, burger..."
+              placeholder="Search dishes or ingredients..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full pl-10 pr-4 py-2 bg-slate-900 border border-slate-800 rounded-xl text-sm text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400 transition"
+              className="w-full pl-10 pr-4 py-2 bg-neutral-900 border border-neutral-800 rounded-xl text-sm text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-red-500 focus:ring-1 focus:ring-red-500 transition"
             />
           </div>
         </div>
@@ -88,26 +88,30 @@ export default function Menu({ onAddToCart, cartItems }) {
             return (
               <div 
                 key={dish.id}
-                className="group bg-slate-900/90 border border-slate-800 rounded-2xl overflow-hidden hover:border-amber-500/40 hover:shadow-2xl hover:shadow-amber-500/10 transition-all duration-300 flex flex-col justify-between"
+                className="group bg-neutral-900/90 border border-neutral-800 rounded-2xl overflow-hidden hover:border-red-600/50 hover:shadow-2xl hover:shadow-red-900/20 hover:-translate-y-2 transition-all duration-300 flex flex-col justify-between"
               >
                 {/* Dish Picture & Badge */}
-                <div className="relative h-48 overflow-hidden bg-slate-800">
+                <div className="relative h-48 overflow-hidden bg-neutral-950">
                   <img
                     src={dish.image}
                     alt={dish.name}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+                    className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500"
                     loading="lazy"
+                    onError={(e) => {
+                      e.target.onerror = null;
+                      e.target.src = "https://images.unsplash.com/photo-1546069901-ba9599a7e63c?auto=format&fit=crop&w=800&q=80";
+                    }}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-black/30" />
+                  <div className="absolute inset-0 bg-gradient-to-t from-neutral-950/90 via-transparent to-black/30" />
                   
                   {/* Category Tag */}
-                  <span className="absolute top-3 left-3 bg-slate-950/80 backdrop-blur-md text-amber-400 text-xs px-2.5 py-1 rounded-lg font-medium border border-amber-500/20">
+                  <span className="absolute top-3 left-3 bg-black/80 backdrop-blur-md text-red-400 text-xs px-2.5 py-1 rounded-lg font-semibold border border-red-900/40">
                     {dish.badge || dish.category}
                   </span>
 
                   {/* Rating */}
-                  <div className="absolute top-3 right-3 bg-slate-950/80 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-amber-300 border border-slate-800">
-                    <Star className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
+                  <div className="absolute top-3 right-3 bg-black/80 backdrop-blur-md px-2 py-1 rounded-lg flex items-center gap-1 text-xs font-bold text-red-400 border border-neutral-800">
+                    <Star className="w-3.5 h-3.5 fill-red-500 text-red-500" />
                     <span>{dish.rating}</span>
                   </div>
                 </div>
@@ -115,29 +119,29 @@ export default function Menu({ onAddToCart, cartItems }) {
                 {/* Content */}
                 <div className="p-5 flex-1 flex flex-col justify-between space-y-4">
                   <div>
-                    <h3 className="font-bold text-lg text-white group-hover:text-amber-400 transition-colors">
+                    <h3 className="font-bold text-lg text-white group-hover:text-red-400 transition-colors duration-200">
                       {dish.name}
                     </h3>
-                    <p className="text-xs text-slate-400 mt-1 line-clamp-2 leading-relaxed">
+                    <p className="text-xs text-neutral-400 mt-1 line-clamp-2 leading-relaxed">
                       {dish.description}
                     </p>
                   </div>
 
                   {/* Price & Action */}
-                  <div className="pt-2 border-t border-slate-800/80 flex items-center justify-between">
+                  <div className="pt-2 border-t border-neutral-800 flex items-center justify-between">
                     <div>
-                      <span className="text-xs text-slate-400 block font-medium">Price</span>
-                      <span className="text-xl font-extrabold text-amber-400">
+                      <span className="text-[11px] text-neutral-400 block font-medium">Price</span>
+                      <span className="text-xl font-extrabold text-red-500">
                         Rs. {dish.price}
                       </span>
                     </div>
 
                     <button
                       onClick={() => handleAdd(dish)}
-                      className={`flex items-center gap-1.5 px-3.5 py-2 rounded-xl text-xs font-bold transition-all shadow-md ${
+                      className={`flex items-center gap-1.5 px-4 py-2 rounded-xl text-xs font-bold transition-all duration-200 shadow-md cursor-pointer ${
                         isJustAdded
-                          ? 'bg-emerald-500 text-slate-950 shadow-emerald-500/20'
-                          : 'bg-amber-500 hover:bg-amber-400 text-slate-950 shadow-amber-500/20 hover:scale-105 active:scale-95'
+                          ? 'bg-emerald-600 text-white shadow-emerald-600/30 scale-105'
+                          : 'bg-gradient-to-r from-red-600 to-rose-700 hover:from-red-500 hover:to-red-600 text-white shadow-red-700/30 hover:scale-105 active:scale-95'
                       }`}
                     >
                       {isJustAdded ? (
@@ -160,8 +164,8 @@ export default function Menu({ onAddToCart, cartItems }) {
         </div>
 
         {filteredDishes.length === 0 && (
-          <div className="text-center py-16 bg-slate-900/40 rounded-2xl border border-slate-800">
-            <p className="text-slate-400 text-sm">No dishes match your filter. Try searching for something else!</p>
+          <div className="text-center py-16 bg-neutral-900/40 rounded-2xl border border-neutral-800">
+            <p className="text-neutral-400 text-sm">No dishes match your filter. Try searching for something else!</p>
           </div>
         )}
 
