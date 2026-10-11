@@ -95,10 +95,13 @@ export default function OrderForm({
 
       // 2. Send order email to Gmail via EmailJS
       const templateParams = {
+        name: formData.name.trim(),
+        email: 'restaurantbussines337@gmail.com',
         customer_name: formData.name.trim(),
         customer_phone: formData.phone.trim(),
         customer_address: formData.address.trim(),
         order_items: formattedEmailItems,
+        message: `Order Items:\n${formattedEmailItems}\n\nTotal Bill: Rs. ${totalPrice}\nCustomer Phone: ${formData.phone.trim()}\nAddress: ${formData.address.trim()}`,
         total_price: totalPrice,
         order_time: orderTimeString,
         notes: formData.notes || 'None',
